@@ -1,5 +1,5 @@
-This small Sinatra app receives GitHub service hook requests, and turns them into Bamboo REST API calls.
-It allows you to run your build when any of the branches changes.
+This small Sinatra app receives GitHub service hook requests, and turns them into Atlassian Bamboo REST API calls.
+It allows you to run your Continuous Integration build when any of the branches change.
 
 Bamboo configuration
 --------------------
