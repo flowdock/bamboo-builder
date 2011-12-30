@@ -19,9 +19,14 @@ The Sinatra application uses the following environment variables:
 * BAMBOO\_PASSWORD (also created in the previous section)
 * BAMBOO\_HOST, for example "https://sub.domain.com:8443/" (protocol, hostname and port are all handled)
 
-Also, branch names are mapped to Bamboo build keys using environment variables. For example:
+Running locally
+---------------
 
-* BRANCH\_bamboo-builder, build key for branch "bamboo-builder", for example "MYPROJECT-MYPLAN"
+Configure the environment variables as specified above. Then simply:
+
+* `gem install bundler`
+* `bundle install`
+* `ruby bamboo-builder.rb`
 
 Deploying in Heroku
 -------------------
@@ -32,10 +37,16 @@ Deploying in Heroku
 * Clone this repo `git clone git://github.com/flowdock/bamboo-builder`
 * `cd /path/to/bamboo-builder`
 * `heroku create [optional-app-name]`
-* `heroku config:add BAMBOO_USERNAME="<username>" BAMBOO_PASSWORD="<password>" BAMBOO_HOST="<host>" BRANCH_my-backend="<plan>"`
+* `heroku config:add BAMBOO_USERNAME="<username>" BAMBOO_PASSWORD="<password>" BAMBOO_HOST="<host>"`
 * `git push heroku master`
 
-For debugging, check out `heroku logs`.
+GitHub configuration
+--------------------
+
+Go to your repository's Admin page and add a Service Hook. It should point to http://yourapp.heroku.com/bambooBuild/BUILDKEY,
+where BUILDKEY is the Bamboo build key consisting of project name and plan name, for example "MYPROJECT-MYPLAN".
+
+Save settings and press the "Test Hook" button test your setup. For debugging, check out `heroku logs`.
 
 Authors
 -------
