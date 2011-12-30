@@ -32,7 +32,7 @@ Deploying in Heroku
 * Clone this repo `git clone git://github.com/flowdock/bamboo-builder`
 * `cd /path/to/bamboo-builder`
 * `heroku create [optional-app-name]`
-* `heroku config:add BAMBOO_USERNAME="<username>" BAMBOO_PASSWORD="<password>" BAMBOO_HOST="<host>" BRANCH_my-backend="<plan>"
+* `heroku config:add BAMBOO_USERNAME="<username>" BAMBOO_PASSWORD="<password>" BAMBOO_HOST="<host>" BRANCH_my-backend="<plan>"`
 * `git push heroku master`
 
 For debugging, check out `heroku logs`.
