@@ -7,7 +7,6 @@ require 'json'
 BAMBOO_USERNAME = ENV['BAMBOO_USERNAME']
 BAMBOO_PASSWORD = ENV['BAMBOO_PASSWORD']
 BAMBOO_HOST = ENV['BAMBOO_HOST']
-# BRANCH_<repo_name> = "<plan_name>"
 
 BAMBOO_BUILD_BRANCH_VARIABLE = "buildBranch"
 
@@ -28,26 +27,24 @@ def build_branch(plan, branch)
 end
 
 def repository_to_plan(repository)
-  ENV["BRANCH_#{repository}"]
+  ENV["REPOSITORY_#{repository}"]
 end
 
-def parse_payload(payload)
-  plan = repository_to_plan(payload["repository"]["name"])
-
-  branch = if payload["ref"].match(/refs\/heads\/(.*)$/)
+def branch_from_payload(payload)
+  if payload["ref"].match(/refs\/heads\/(.*)$/)
     $1
   else
     "master"
   end
-
-  [plan, branch]
 end
 
 get '/' do
   "OK"
 end
 
-post '/bambooBuild' do
-  plan, branch = parse_payload(JSON.parse(params[:payload]))
+post '/bambooBuild/:plan' do
+  plan = params[:plan]
+  branch = branch_from_payload(JSON.parse(params[:payload]))
+
   build_branch(plan, branch)
 end
