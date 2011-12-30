@@ -10,9 +10,6 @@ BAMBOO_HOST = ENV['BAMBOO_HOST']
 
 BAMBOO_BUILD_BRANCH_VARIABLE = "buildBranch"
 
-configure :production do
-end
-
 def build_branch(plan, branch)
   uri = URI.parse(BAMBOO_HOST)
   http = Net::HTTP.new(uri.host, uri.port)
@@ -24,10 +21,6 @@ def build_branch(plan, branch)
   response = http.request(request)
 
   response.body
-end
-
-def repository_to_plan(repository)
-  ENV["REPOSITORY_#{repository}"]
 end
 
 def branch_from_payload(payload)
